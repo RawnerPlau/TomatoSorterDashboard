@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     ViewData["Title"] = "Home Page";
 }
 <!DOCTYPE html>
@@ -17,8 +18,6 @@
     <!-- MDB -->
     <link rel="stylesheet" href="~/css/mdb.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-
-
 </head>
 
 <body>
@@ -47,7 +46,7 @@
                         <div class="ms-4">
                             <p class="text-muted mb-2">Total Tomatoes</p>
                             <p class="mb-0">
-                                <span class="h5 me-2">0</span>
+                                <span class="h5 me-2">@ViewBag.Total</span>
                             </p>
                         </div>
                     </div>
@@ -75,7 +74,7 @@
                         <div class="ms-4">
                             <p class="text-muted mb-2">Ripe</p>
                             <p class="mb-0">
-                                <span class="h5 me-2">0</span>
+                                <span class="h5 me-2">@ViewBag.Ripe</span>
                               
                             </p>
                         </div>
@@ -104,7 +103,7 @@
                         <div class="ms-4">
                             <p class="text-muted mb-2">Half-Ripe</p>
                             <p class="mb-0">
-                                <span class="h5 me-2">0</span>
+                                <span class="h5 me-2">@ViewBag.HalfRipe</span>
                                 
                             </p>
                         </div>
@@ -133,7 +132,7 @@
                         <div class="ms-4">
                             <p class="text-muted mb-2">Unripe</p>
                             <p class="mb-0">
-                                <span class="h5 me-2">0</span>
+                                <span class="h5 me-2">@ViewBag.Unripe</span>
                                 
                             </p>
                         </div>
@@ -162,7 +161,7 @@
                         <div class="ms-4">
                             <p class="text-muted mb-2">Defect</p>
                             <p class="mb-0">
-                                <span class="h5 me-2">0</span>
+                                <span class="h5 me-2">@ViewBag.Defect</span>
                                 
                             </p>
                         </div>
@@ -176,7 +175,7 @@
         <!-- Section: Summary -->
 
         <section class="mb-5">
-            <div class="col-xl-4 bg-glass shadow-4-strong rounded-6 h-100 p-4">
+            <div class="bg-glass shadow-4-strong rounded-6 h-100 p-4">
                 <div class="border-bottom mb-4">
                     <div class="row align-items-center">
                         <div class="col-6 mb-4 mb-md-0">
@@ -201,43 +200,6 @@
                 </div>
             </div>
         </section>
-
-
-        <section class="">
-            <div class="row gx-lg-5">
-                <div class="col-lg-6 col-md-12 mb-4 mb-lg-0">
-                    <!-- Card -->
-                    <div class="bg-glass shadow-4-strong rounded-6 h-100">
-                        <!-- Card header -->
-                        <div class="p-4 border-bottom">
-                            <div class="row align-items-center">
-                                <div class="col-6 mb-4 mb-md-0">
-                                    <p class="text-muted mb-2">Users</p>
-                                    <p class="mb-0">
-                                        <span class="h5 me-2">0</span>
-                                        
-                                    </p>
-                                </div>
-
-                                <div class="col-6 mb-4 mb-md-0 text-end">
-                                    <a class="btn btn-outline-white btn-rounded"
-                                       href="#"
-                                       role="button">Details</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Card header -->
-                        <!-- Card body -->
-                        <div class="p-4">
-                            <canvas id="line-chart" height="200px"></canvas>
-                        </div>
-                        <!-- Card body -->
-                    </div>
-                    <!-- Card -->
-                </div>
-            </div>
-        </section>
-        <!-- Section: Visualization -->
     </div>
 
     <script type="text/javascript" src="~/js/mdb.umd.min.js"></script>

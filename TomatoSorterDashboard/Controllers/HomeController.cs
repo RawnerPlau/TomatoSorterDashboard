@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using TomatoSorterDashboard.Interfaces;
 using TomatoSorterDashboard.Models;
 
 namespace TomatoSorterDashboard.Controllers
@@ -7,15 +8,23 @@ namespace TomatoSorterDashboard.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ITomatoRepository _repository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ITomatoRepository repository)
         {
             _logger = logger;
+            _repository = repository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            Tomato tomato = await _repository.GetOneTomatoDoc();
+            ViewBag.Total = tomato.Total;
+            ViewBag.Ripe = tomato.Ripe;
+            ViewBag.HalfRipe = tomato.HalfRipe;
+            ViewBag.Unripe = tomato.Unripe;
+            ViewBag.Defect = tomato.Defect;
+            return View(tomato);
         }
 
         public IActionResult Privacy()
