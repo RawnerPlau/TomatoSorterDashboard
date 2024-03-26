@@ -4,6 +4,8 @@ namespace TomatoSorterDashboard.Interfaces
 {
     public interface ITomatoRepository
     {
-        public Task<Tomato> GetOneTomatoDoc();
+        public Task<Tomato> GetTomatoToday();
+
+        public Task<List<Tomato>> GetAllTomatoes();
     }
 }

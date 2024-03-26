@@ -4,6 +4,7 @@ using Google.Cloud.Firestore.V1;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 using System.Collections;
+using System.Globalization;
 using TomatoSorterDashboard.Interfaces;
 using TomatoSorterDashboard.Models;
 
@@ -24,11 +25,26 @@ namespace TomatoSorterDashboard.Repositories
             _db = FirestoreDb.Create(projectId, client);
         }
 
-        public async Task<Tomato> GetOneTomatoDoc() 
+        public async Task<List<Tomato>> GetAllTomatoes()
+        {
+            Query query = _db.Collection("tomatoes");
+            QuerySnapshot querySnapshot = await query.GetSnapshotAsync();
+            List<Tomato> tomatoes = new List<Tomato>();
+
+            foreach (DocumentSnapshot document in querySnapshot.Documents)
+            {
+                Tomato tomato = document.ConvertTo<Tomato>(); // Convert document to Tomato object
+                tomatoes.Add(tomato);
+            }
+
+            return tomatoes;
+        }
+
+        public async Task<Tomato> GetTomatoToday() 
         {
             Tomato recentTomato = new Tomato();
 
-            DocumentReference document = _db.Collection("tomatoes").Document("03-26-24");
+            DocumentReference document = _db.Collection("tomatoes").Document(DateTime.Today.ToString("MM-dd-yy"));
             DocumentSnapshot documentSnapshot = await document.GetSnapshotAsync();
             if (documentSnapshot.Exists)
             {
@@ -41,7 +57,9 @@ namespace TomatoSorterDashboard.Repositories
                     HalfRipe = documentSnapshot.GetValue<int>("Half-Ripe"),
                     Unripe = documentSnapshot.GetValue<int>("Unripe"),
                     Defect = documentSnapshot.GetValue<int>("Defect"),
-                };
+                    DateScanned = documentSnapshot.GetValue<string>("DateScanned")
+
+            };
 
                 recentTomato = tomato;
             }

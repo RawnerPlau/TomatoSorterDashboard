@@ -18,13 +18,24 @@ namespace TomatoSorterDashboard.Controllers
 
         public async Task<IActionResult> Index()
         {
-            Tomato tomato = await _repository.GetOneTomatoDoc();
-            ViewBag.Total = tomato.Total;
-            ViewBag.Ripe = tomato.Ripe;
-            ViewBag.HalfRipe = tomato.HalfRipe;
-            ViewBag.Unripe = tomato.Unripe;
-            ViewBag.Defect = tomato.Defect;
-            return View(tomato);
+            var tomatoes = await _repository.GetAllTomatoes();
+            int ripe = tomatoes.Sum(x => x.Ripe);
+            int halfripe = tomatoes.Sum(x => x.HalfRipe);
+            int unripe = tomatoes.Sum(x => x.Unripe);
+            int defect = tomatoes.Sum(x => x.Defect);
+
+            ViewBag.Ripe = ripe;
+            ViewBag.HalfRipe = halfripe;   
+            ViewBag.Unripe = unripe;
+            ViewBag.Defect = defect;
+            ViewBag.Total = ripe+halfripe+unripe+defect;
+
+            DashboardViewModel dashboardViewModel = new DashboardViewModel()
+            {
+                Tomatoes = tomatoes
+            };
+
+            return View(dashboardViewModel);
         }
 
         public IActionResult Privacy()

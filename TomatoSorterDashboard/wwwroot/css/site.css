@@ -20,6 +20,11 @@ body {
     }
 }
 
+table-transparen{
+    background-color: transparent !important;
+    color: white;
+}
+
 .bg-theme {
     background-color: hsl(218, 41%, 25%);
 }
