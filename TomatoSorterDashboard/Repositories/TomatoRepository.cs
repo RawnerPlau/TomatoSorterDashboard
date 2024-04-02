@@ -22,11 +22,15 @@ namespace TomatoSorterDashboard.Repositories
                 JsonCredentials = firestoreCredential.Serialize()
             }.Build();
 
+           
+
             _db = FirestoreDb.Create(projectId, client);
+            
         }
 
         public async Task<List<Tomato>> GetAllTomatoes()
         {
+            
             Query query = _db.Collection("tomatoes");
             QuerySnapshot querySnapshot = await query.GetSnapshotAsync();
             List<Tomato> tomatoes = new List<Tomato>();
@@ -36,7 +40,7 @@ namespace TomatoSorterDashboard.Repositories
                 Tomato tomato = document.ConvertTo<Tomato>(); // Convert document to Tomato object
                 tomatoes.Add(tomato);
             }
-
+            Console.Write("xcxcx");
             return tomatoes;
         }
 

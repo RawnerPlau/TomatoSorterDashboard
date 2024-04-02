@@ -16,6 +16,10 @@ namespace TomatoSorterDashboard.Controllers
             _repository = repository;
         }
 
+        [Route("")]
+        [Route("Home")]
+        [Route("Home/Index")]
+        [Route("Home/Index/{id?}")]
         public async Task<IActionResult> Index()
         {
             var tomatoes = await _repository.GetAllTomatoes();
@@ -28,7 +32,7 @@ namespace TomatoSorterDashboard.Controllers
             ViewBag.HalfRipe = halfripe;   
             ViewBag.Unripe = unripe;
             ViewBag.Defect = defect;
-            ViewBag.Total = ripe+halfripe+unripe+defect;
+            ViewBag.Total = ripe+halfripe+unripe;
 
             DashboardViewModel dashboardViewModel = new DashboardViewModel()
             {
