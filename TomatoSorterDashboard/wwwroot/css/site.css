@@ -11,7 +11,7 @@ body {
     height: 100%;
     /*padding-left: 240px;*/
     overflow-x: hidden;
-    color: #fff;
+    color: white;
 }
 
 @media (max-width: 991.98px) {

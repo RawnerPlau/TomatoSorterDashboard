@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using System.Diagnostics;
@@ -17,8 +18,10 @@ namespace TomatoSorterDashboard.Controllers
             _repository = repository;
         }
 
+        
         [Route("")]
         [Route("Home/Index")]
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             var tomatoes = await _repository.GetAllTomatoes();
