@@ -1,6 +1,6 @@
 ﻿namespace TomatoSorterDashboard.Models
 {
-    public class DashboardViewModel
+    public class HomeViewModel
     {
         public List<Tomato> Tomatoes { get; set; }
     }

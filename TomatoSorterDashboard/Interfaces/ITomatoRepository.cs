@@ -7,5 +7,7 @@ namespace TomatoSorterDashboard.Interfaces
         public Task<Tomato> GetTomatoToday();
 
         public Task<List<Tomato>> GetAllTomatoes();
+
+        public Task<Dashboard> GetDashboardValues();
     }
 }

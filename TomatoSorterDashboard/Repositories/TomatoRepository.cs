@@ -40,8 +40,28 @@ namespace TomatoSorterDashboard.Repositories
                 Tomato tomato = document.ConvertTo<Tomato>(); // Convert document to Tomato object
                 tomatoes.Add(tomato);
             }
-            Console.Write("xcxcx");
             return tomatoes;
+        }
+
+        public async Task<Dashboard> GetDashboardValues()
+        {
+
+            Query query = _db.Collection("tomatoes");
+            QuerySnapshot querySnapshot = await query.GetSnapshotAsync();
+            Dashboard dashboardValues = new Dashboard();
+
+            foreach (DocumentSnapshot document in querySnapshot.Documents)
+            {
+                Tomato data = document.ConvertTo<Tomato>(); // Convert document to Tomato object
+                dashboardValues.Unripe += data.Unripe;
+                dashboardValues.Ripe += data.Ripe;
+                dashboardValues.HalfRipe += data.HalfRipe;
+                dashboardValues.Defect += data.Defect;
+            }
+            
+            dashboardValues.Total = dashboardValues.HalfRipe + dashboardValues.Ripe + dashboardValues.Unripe;
+
+            return dashboardValues;
         }
 
         public async Task<Tomato> GetTomatoToday() 

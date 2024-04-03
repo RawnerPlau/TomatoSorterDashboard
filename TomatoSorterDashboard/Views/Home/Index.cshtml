@@ -1,4 +1,4 @@
-﻿@model TomatoSorterDashboard.Models.DashboardViewModel
+﻿@model TomatoSorterDashboard.Models.HomeViewModel
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -52,8 +52,7 @@
                         <div class="ms-4">
                             <p class="text-muted mb-2">Ripe Tomatoes</p>
                             <p class="mb-0">
-                                <span class="h5 me-2">@ViewBag.Ripe</span>
-                              
+                                <span id="Ripe" class="h5 me-2"></span>
                             </p>
                         </div>
                     </a>
@@ -81,8 +80,8 @@
                         <div class="ms-4">
                             <p class="text-muted mb-2">Half-Ripe Tomatoes</p>
                             <p class="mb-0">
-                                <span class="h5 me-2">@ViewBag.HalfRipe</span>
-                                
+                                <span id="HalfRipe" class="h5 me-2"></span>
+                                <!--<small class="text-success text-sm"><i class="fas fa-arrow-up fa-sm me-1"></i>23,58%</small>-->
                             </p>
                         </div>
                     </a>
@@ -110,8 +109,7 @@
                         <div class="ms-4">
                             <p class="text-muted mb-2">Unripe Tomatoes</p>
                             <p class="mb-0">
-                                <span class="h5 me-2">@ViewBag.Unripe</span>
-                                
+                                <span id="Unripe" class="h5 me-2"></span>
                             </p>
                         </div>
                     </a>
@@ -138,7 +136,7 @@
                         <div class="ms-4">
                             <p class="text-muted mb-2">Total of Good Tomatoes</p>
                             <p class="mb-0">
-                                <span class="h5 me-2">@ViewBag.Total</span>
+                                <span id="Total" class="h5 me-2"></span>
                             </p>
                         </div>
                     </div>
@@ -166,8 +164,7 @@
                         <div class="ms-4">
                             <p class="text-muted mb-2">Total of Defect Tomatoes</p>
                             <p class="mb-0">
-                                <span class="h5 me-2">@ViewBag.Defect</span>
-                                
+                                <span id="Defect" class="h5 me-2"></span>
                             </p>
                         </div>
                     </a>
@@ -249,3 +246,52 @@
     
 </body>
 </html>
+@section Scripts{
+    <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore-compat.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBj9imOuZYvXUvmoh_iJrIp5t3ZAb7VrGo",
+            authDomain: "tomato-sorter-dashboard.firebaseapp.com",
+            databaseURL: "https://tomato-sorter-dashboard-default-rtdb.firebaseio.com",
+            projectId: "tomato-sorter-dashboard",
+            storageBucket: "tomato-sorter-dashboard.appspot.com",
+            messagingSenderId: "308297171463",
+            appId: "1:308297171463:web:522b7858e058d5f8f2a0a2",
+            measurementId: "G-6NRRLLXZHD"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+
+        // Initialize Cloud Firestore and get a reference to the service
+        const db = firebase.firestore();
+
+        
+        db.collection("tomatoes")
+            .onSnapshot((querySnapshot) => {
+                let ripe = 0
+                let halfripe = 0
+                let unripe = 0
+                let defect = 0
+                let total = 0
+                querySnapshot.forEach((doc) => {
+                    const tomatoData = doc.data();
+                    ripe += tomatoData.Ripe;
+                    halfripe += tomatoData.HalfRipe;
+                    unripe += tomatoData.Unripe;
+                    defect += tomatoData.Defect;
+                    total = ripe + halfripe + unripe;
+
+                    document.getElementById("Ripe").textContent = ripe;
+                    document.getElementById("HalfRipe").textContent = halfripe;
+                    document.getElementById("Unripe").textContent = unripe;
+                    document.getElementById("Defect").textContent = defect;
+                    document.getElementById("Total").textContent = total;
+                });
+            });
+    </script>
+}

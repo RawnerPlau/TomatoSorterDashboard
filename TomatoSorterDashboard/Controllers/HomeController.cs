@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using System.Diagnostics;
 using TomatoSorterDashboard.Interfaces;
 using TomatoSorterDashboard.Models;
@@ -17,9 +18,7 @@ namespace TomatoSorterDashboard.Controllers
         }
 
         [Route("")]
-        [Route("Home")]
         [Route("Home/Index")]
-        [Route("Home/Index/{id?}")]
         public async Task<IActionResult> Index()
         {
             var tomatoes = await _repository.GetAllTomatoes();
@@ -29,12 +28,12 @@ namespace TomatoSorterDashboard.Controllers
             int defect = tomatoes.Sum(x => x.Defect);
 
             ViewBag.Ripe = ripe;
-            ViewBag.HalfRipe = halfripe;   
+            ViewBag.HalfRipe = halfripe;
             ViewBag.Unripe = unripe;
             ViewBag.Defect = defect;
             ViewBag.Total = ripe+halfripe+unripe;
 
-            DashboardViewModel dashboardViewModel = new DashboardViewModel()
+            HomeViewModel dashboardViewModel = new HomeViewModel()
             {
                 Tomatoes = tomatoes
             };
@@ -42,11 +41,21 @@ namespace TomatoSorterDashboard.Controllers
             return View(dashboardViewModel);
         }
 
+        [HttpGet]
+        [Route("Home/GetDashboardValues")]
+        public ActionResult GetDashboardValues()
+        {
+            var dashboardValues = _repository.GetDashboardValues();
+            return Json(dashboardValues);
+        }
+
+        [Route("Home/Privacy")]
         public IActionResult Privacy()
         {
             return View();
         }
 
+        [Route("Home/Error")]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
