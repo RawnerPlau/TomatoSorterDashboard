@@ -9,21 +9,21 @@ namespace TomatoSorterDashboard.Models
         public int Id { get; set; }
 
         [FirestoreProperty]
-        public int Ripe { get; set; }
+        public int RIPE { get; set; }
 
         [FirestoreProperty]
-        public int HalfRipe { get; set; }
+        public int HALFRIPE { get; set; }
 
         [FirestoreProperty]
-        public int Unripe { get; set; }
+        public int UNRIPE { get; set; }
 
         [FirestoreProperty]
-        public int Total { get; set; }
+        public int TOTAL { get; set; }
 
         [FirestoreProperty]
-        public int Defect { get; set; }
+        public int DEFECT { get; set; }
 
         [FirestoreProperty]
-        public string DateScanned { get; set; }
+        public string DATESCANNED { get; set; }
     }
 }

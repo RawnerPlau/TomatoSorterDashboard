@@ -53,10 +53,10 @@ namespace TomatoSorterDashboard.Repositories
             foreach (DocumentSnapshot document in querySnapshot.Documents)
             {
                 Tomato data = document.ConvertTo<Tomato>(); // Convert document to Tomato object
-                dashboardValues.Unripe += data.Unripe;
-                dashboardValues.Ripe += data.Ripe;
-                dashboardValues.HalfRipe += data.HalfRipe;
-                dashboardValues.Defect += data.Defect;
+                dashboardValues.Unripe += data.UNRIPE;
+                dashboardValues.Ripe += data.RIPE;
+                dashboardValues.HalfRipe += data.HALFRIPE;
+                dashboardValues.Defect += data.DEFECT;
             }
             
             dashboardValues.Total = dashboardValues.HalfRipe + dashboardValues.Ripe + dashboardValues.Unripe;
@@ -76,12 +76,12 @@ namespace TomatoSorterDashboard.Repositories
                 {
                     Id = documentSnapshot.GetValue<int>("id"),
                     //DateScanned = Convert.ToDateTime(documentSnapshot.GetValue<Timestamp>("DateScanned")).ToLocalTime(),
-                    Total = documentSnapshot.GetValue<int>("Total"),
-                    Ripe = documentSnapshot.GetValue<int>("Ripe"),
-                    HalfRipe = documentSnapshot.GetValue<int>("Half-Ripe"),
-                    Unripe = documentSnapshot.GetValue<int>("Unripe"),
-                    Defect = documentSnapshot.GetValue<int>("Defect"),
-                    DateScanned = documentSnapshot.GetValue<string>("DateScanned")
+                    TOTAL = documentSnapshot.GetValue<int>("Total"),
+                    RIPE = documentSnapshot.GetValue<int>("Ripe"),
+                    HALFRIPE = documentSnapshot.GetValue<int>("Half-Ripe"),
+                    UNRIPE = documentSnapshot.GetValue<int>("Unripe"),
+                    DEFECT = documentSnapshot.GetValue<int>("Defect"),
+                    DATESCANNED = documentSnapshot.GetValue<string>("DateScanned")
 
             };
 

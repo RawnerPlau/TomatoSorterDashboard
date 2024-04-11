@@ -181,28 +181,28 @@
         <!-- Table -->
         <section class="mb-5">
             <div class="table-responsive bg-glass shadow-4-strong rounded-6">
-                <table class="table table-borderless table-hover table-transparent
+                <table id="tomatoTable" class="table table-borderless table-hover table-transparent
                        align-middle
                        mb-0">
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.Tomatoes![0].DateScanned)
+                                @Html.DisplayNameFor(model => model.Tomatoes![0].DATESCANNED)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Tomatoes![0].Ripe)
+                                @Html.DisplayNameFor(model => model.Tomatoes![0].RIPE)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Tomatoes![0].HalfRipe)
+                                @Html.DisplayNameFor(model => model.Tomatoes![0].HALFRIPE)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Tomatoes![0].Unripe)
+                                @Html.DisplayNameFor(model => model.Tomatoes![0].UNRIPE)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Tomatoes![0].Defect)
+                                @Html.DisplayNameFor(model => model.Tomatoes![0].DEFECT)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Tomatoes![0].Total)
+                                @Html.DisplayNameFor(model => model.Tomatoes![0].TOTAL)
                             </th>
                         </tr>
                     </thead>
@@ -214,22 +214,22 @@
                             {
                                 <tr>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.DateScanned)
+                                        @Html.DisplayFor(modelItem => item.DATESCANNED)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Ripe)
+                                        @Html.DisplayFor(modelItem => item.RIPE)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.HalfRipe)
+                                        @Html.DisplayFor(modelItem => item.HALFRIPE)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Unripe)
+                                        @Html.DisplayFor(modelItem => item.UNRIPE)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Defect)
+                                        @Html.DisplayFor(modelItem => item.DEFECT)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Total)
+                                        @Html.DisplayFor(modelItem => item.TOTAL)
                                     </td>
                                 </tr>
                             }
@@ -281,11 +281,11 @@
                 let total = 0
                 querySnapshot.forEach((doc) => {
                     const tomatoData = doc.data();
-                    ripe += tomatoData.Ripe;
-                    halfripe += tomatoData.HalfRipe;
-                    unripe += tomatoData.Unripe;
-                    defect += tomatoData.Defect;
-                    total = ripe + halfripe + unripe;
+                    ripe += tomatoData.RIPE;
+                    halfripe += tomatoData.HALFRIPE;
+                    unripe += tomatoData.UNRIPE;
+                    defect += tomatoData.DEFECT;
+                    total = tomatoData.TOTAL;
 
                     document.getElementById("Ripe").textContent = ripe;
                     document.getElementById("HalfRipe").textContent = halfripe;

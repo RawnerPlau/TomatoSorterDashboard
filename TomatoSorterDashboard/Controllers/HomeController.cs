@@ -25,10 +25,10 @@ namespace TomatoSorterDashboard.Controllers
         public async Task<IActionResult> Index()
         {
             var tomatoes = await _repository.GetAllTomatoes();
-            int ripe = tomatoes.Sum(x => x.Ripe);
-            int halfripe = tomatoes.Sum(x => x.HalfRipe);
-            int unripe = tomatoes.Sum(x => x.Unripe);
-            int defect = tomatoes.Sum(x => x.Defect);
+            int ripe = tomatoes.Sum(x => x.RIPE);
+            int halfripe = tomatoes.Sum(x => x.HALFRIPE);
+            int unripe = tomatoes.Sum(x => x.UNRIPE);
+            int defect = tomatoes.Sum(x => x.DEFECT);
 
             ViewBag.Ripe = ripe;
             ViewBag.HalfRipe = halfripe;
